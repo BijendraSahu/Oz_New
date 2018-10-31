@@ -428,18 +428,20 @@
 
                                         {{--<div class="col-sm-6 form-group">--}}
 
-                                            {{--<input type="text" value="{{$all_items->delivery}}" name="item_delivery"--}}
-                                                   {{--class="form-control"--}}
-                                                   {{--placeholder="Enter Delivery Information">--}}
+                                        {{--<input type="text" value="{{$all_items->delivery}}" name="item_delivery"--}}
+                                        {{--class="form-control"--}}
+                                        {{--placeholder="Enter Delivery Information">--}}
                                         {{--</div>--}}
 
                                         <div class="col-sm-6 form-group">
 
-                                            <input type="text" name="price" value="{{$all_items->price}}" class="form-control"
+                                            <input type="text" name="price" value="{{$all_items->price}}"
+                                                   class="form-control"
                                                    placeholder="Enter Price" required>
                                         </div>
                                         <div class="col-sm-6 form-group">
-                                            <input type="text" value="{{$all_items->special_price}}" name="special_price" class="form-control"
+                                            <input type="text" value="{{$all_items->special_price}}"
+                                                   name="special_price" class="form-control"
                                                    placeholder="Enter Special Price">
                                         </div>
                                         <div class="col-sm-6 form-group">
@@ -457,7 +459,21 @@
                                                    name="item_metadescription" class="form-control"
                                                    placeholder="Enter Meta Description">
                                         </div>
+                                        <div class="col-sm-6 form-group">
+                                            <div class="radio_box">
+                                                <div class="radio">
+                                                    <label for="deli_radio" class="radio-label">Is Special Month</label>
 
+                                                    <input id="deli_radio" value="1" class="gender"
+                                                           name="is_special_month"
+                                                           type="radio" {{$all_items->is_special_month == 1?'checked':''}} />
+                                                    <label for="deli_radio" class="radio-label">Yes</label>
+                                                    <input id="deli_radio2" value="0" class="gender"
+                                                           name="is_special_month" type="radio" {{$all_items->is_special_month == 0?'checked':''}} />
+                                                    <label for="deli_radio2" class="radio-label">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-6 form-group">
                                             <input type="submit" value="Update"
                                                    class="btn btn-success">
@@ -818,22 +834,25 @@
                 buttons: true,
                 dangerMode: true,
             })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.get('{{url('delete_item_pic')}}', {
-                            i_name: i_name,
-                            m_id: m_id,
-                            item_id: item_id
-                        }, function (data) {
-                            $(".divhye").load(location.href + " .divhye");
-                        });
-                        swal(" Your image file has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your image file is safe!");
-                    }
-                });
+                .then((willDelete) = > {
+                if (willDelete) {
+                    $.get('{{url('delete_item_pic')}}', {
+                        i_name: i_name,
+                        m_id: m_id,
+                        item_id: item_id
+                    }, function (data) {
+                        $(".divhye").load(location.href + " .divhye");
+                    });
+                    swal(" Your image file has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your image file is safe!"
+        )
+            ;
+        }
+        })
+            ;
 
 
         }

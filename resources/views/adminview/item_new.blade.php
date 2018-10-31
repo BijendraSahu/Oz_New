@@ -499,6 +499,18 @@
                                         </div>
 
                                         <div class="col-sm-6 form-group">
+                                            <div class="radio_box">
+                                                <div class="radio">
+                                                    <label for="deli_radio" class="radio-label">Is Special Month</label>
+
+                                                    <input id="deli_radio" value="1" class="gender" name="is_special_month" type="radio" checked/>
+                                                    <label for="deli_radio" class="radio-label">Yes</label>
+                                                    <input id="deli_radio2" value="0" class="gender" name="is_special_month" type="radio"/>
+                                                    <label for="deli_radio2" class="radio-label">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
                                             <input type="submit" value="Add"
                                                    class="btn btn-success">
                                         </div>
