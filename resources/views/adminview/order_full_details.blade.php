@@ -4,7 +4,7 @@
     <div class="order_row">
         <div class="order_header">
             <div class="order_no">TajTailors{{$order_data->order_no}}</div>
-            <div class="order_amt pull-right"><i class="mdi mdi-currency-inr"></i> {{$desobj->total}}</div>
+            <div class="order_amt pull-right"><i class="mdi mdi-currency-usd"></i> {{$desobj->total}}</div>
         </div>
         <div class="order_details_box">
             <div class="col-md-8 col-sm-12">

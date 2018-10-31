@@ -16,7 +16,7 @@
                                 <div class="order_header">
                                     <div class="order_no">TajTailors{{$order->order_no}}</div>
                                     <div class="order_amt pull-right"><i
-                                                class="mdi mdi-currency-inr"></i> {{$order->total}}
+                                                class="mdi mdi-currency-usd"></i> {{$order->total}}
                                     </div>
                                 </div>
                                 @php

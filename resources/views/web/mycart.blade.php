@@ -25,33 +25,33 @@
                             <div class="option_availability">
                                 <div class="option_txt">Price ({{$itemcount}} items)</div>
                                 <div class="product_right_txt">
-                                    <i class="mdi mdi-currency-inr"></i>{{number_format($total,2)}}
+                                    <i class="mdi mdi-currency-usd"></i>{{number_format($total,2)}}
                                 </div>
                             </div>
                             <?php $delivery_charge = DB::select("SELECT delivery_charge FROM delivery_charges where amount>=$total and is_active= '1' ORDER BY id DESC LIMIT 1"); ?>
                             <div class="option_availability">
                                 <div class="option_txt">Delivery Charges</div>
                                 <div class="product_right_txt">
-                                    <i class="mdi mdi-currency-inr"></i>@if($total>0){{count($delivery_charge)>0?number_format($delivery_charge[0]->delivery_charge,2):'0'}}@else {{'0.00'}} @endif
+                                    <i class="mdi mdi-currency-usd"></i>@if($total>0){{count($delivery_charge)>0?number_format($delivery_charge[0]->delivery_charge,2):'0'}}@else {{'0.00'}} @endif
                                 </div>
                             </div>
                         </div>
                         <div class="option_availability">
                             <div class="option_txt">Amount Payable</div>
                             <div class="order_amt">
-                                <i class="mdi mdi-currency-inr"></i>@if($total>0){{count($delivery_charge)>0?number_format($delivery_charge[0]->delivery_charge+$total,2):$total}}@else {{'0.00'}} @endif
+                                <i class="mdi mdi-currency-usd"></i>@if($total>0){{count($delivery_charge)>0?number_format($delivery_charge[0]->delivery_charge+$total,2):$total}}@else {{'0.00'}} @endif
                             </div>
                         </div>
                         <hr>
                         <!-- <div class="product_btn_box">
                              <a class="btn btn-warning" href="product_list.php"><i class="mdi mdi-basket basic_icon_margin"></i>Continue</a>
-                             <a class="btn btn-success pull-right" href="checkout.php"><i class="mdi mdi-currency-inr basic_icon_margin"></i>Place Order</a>
+                             <a class="btn btn-success pull-right" href="checkout.php"><i class="mdi mdi-currency-usd basic_icon_margin"></i>Place Order</a>
                          </div>-->
                         <div class="product_btn_box">
                             <a class="btn btn-warning btn-sm" href="{{url('product_list')}}"><i
                                         class="mdi mdi-basket basic_icon_margin"></i>Keep Shopping</a>
                             <a class="btn btn-success pull-right btn-sm" href="{{url('checkout')}}"><i
-                                        class="mdi mdi-currency-inr basic_icon_margin"></i>Place Order</a>
+                                        class="mdi mdi-currency-usd basic_icon_margin"></i>Place Order</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                                     <div class="option_txt">Price :</div>
                                                     <div class="product_right_txt">
                                                         @if($item->price > 0)
-                                                            <span class="mdi mdi-currency-inr"></span>{{$item->price}}
+                                                            <span class="mdi mdi-currency-usd"></span>{{$item->price}}
                                                         @else
                                                             {{"-"}}
                                                         @endif
@@ -98,7 +98,7 @@
                                                     <div class="option_txt">Special Price :</div>
                                                     <div class="product_right_txt">
                                                         @if($item->spl_price >0 )
-                                                            <span class="mdi mdi-currency-inr"></span> {{$item->spl_price}}
+                                                            <span class="mdi mdi-currency-usd"></span> {{$item->spl_price}}
                                                         @else
                                                             {{"-"}}
                                                         @endif
@@ -121,7 +121,7 @@
                                         <div class="col-sm-4">
                                             {{--<div class="track_del_address">Free delivery by 15-May-2018</div>--}}
                                             <div class="order_amt"><i
-                                                        class="mdi mdi-currency-inr"></i> {{number_format($row->price,2)}}
+                                                        class="mdi mdi-currency-usd"></i> {{number_format($row->price,2)}}
                                             </div>
                                             <form action="{{url('cart_update').'/'.$row->rowId}}"
                                                   id="cartupdate{{$row->rowId}}"

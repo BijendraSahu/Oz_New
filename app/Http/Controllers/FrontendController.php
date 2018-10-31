@@ -41,17 +41,22 @@ class FrontendController extends Controller
 
     public function user_home()
     {
+        $by_id = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id ORDER BY i.id DESC LIMIT 20";
+        $items = DB::select($by_id);
         if (isset($_SESSION['user_master'])) {
             if (!is_null($_SESSION['user_master'])) {
                 $user_ses = $_SESSION['user_master'];
                 $user = UserMaster::find($user_ses->id);
-                return view('web.home')->with(['user' => $user]);
-            } else {
+                if (count($items) > 0) {
+                    return view('web.home')->with(['user' => $user, 'items' => $items, 'items_count' => count($items)]);
+                }
+            }
+        } else {
+            if (count($items) > 0) {
                 $_SESSION['user_master'] = null;
-                return view('web.home');
+                return view('web.home')->with(['items' => $items, 'items_count' => count($items)]);
             }
         }
-        return view('web.home');
     }
 
     public function my_profile()
@@ -486,7 +491,7 @@ class FrontendController extends Controller
             if (count($email) > 0) {
                 $mail = new \App\Mail();
                 $mail->to = implode(",", $email);
-                $mail->subject = 'OZ DOLLARS - Support Team';
+                $mail->subject = 'Taj Tailors - Support Team';
                 $siteurl = 'http://www.organicdolchi.com/';
                 $username = $address->name;
 //                $salutation = ($user->gender == 'male') ? 'Mr.' : 'Mrs.';

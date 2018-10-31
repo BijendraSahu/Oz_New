@@ -35,20 +35,20 @@
                 {{--</select>--}}
                 @if($item->special_price > 0)
                     <div><span class="product_amt_less"><i
-                                    class="mdi mdi-currency-inr"></i>{{number_format($item->price,2)}}</span><span
+                                    class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span><span
                                 class="product_amt_real"> <i
-                                    class="mdi mdi-currency-inr"></i>{{number_format($item->special_price,2)}}</span>
+                                    class="mdi mdi-currency-usd"></i>{{number_format($item->special_price,2)}}</span>
                     </div>
                 @else
                     <span class="product_amt_real"><i
-                                class="mdi mdi-currency-inr"></i>{{number_format($item->price,2)}}</span>
+                                class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span>
                 @endif
 
             </div>
             @if($item->special_price > 0)
                 <div class="option_availability">
                     <div class="option_txt">Save :</div>
-                    <div class="save_amt">Save Rs. {{$item->price-$item->special_price}}</div>
+                    <div class="save_amt">Save <i class="mdi mdi-currency-usd"></i> {{$item->price-$item->special_price}}</div>
                 </div>
             @endif
 

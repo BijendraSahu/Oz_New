@@ -75,7 +75,7 @@
                                                     <div class="option_txt">Amount</div>
                                                     <div class="product_right_txt">
                                                         <div class="order_amt">
-                                                            <i class="mdi mdi-currency-inr"></i> {{$order->total}}
+                                                            <i class="mdi mdi-currency-usd"></i> {{$order->total}}
                                                         </div>
                                                     </div>
                                                 </div>

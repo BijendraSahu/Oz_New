@@ -3,19 +3,19 @@
     <div class="product_block">
 
         @if(isset($item->special_price))
-            <div class="save_amt">Save Rs. {{$item->price-$item->special_price}}</div>
+            <div class="save_amt">Save <i class="mdi mdi-currency-usd"></i> {{$item->price-$item->special_price}}</div>
 
             <div class="product_amt"><span class="product_amt_less"><i
-                            class="mdi mdi-currency-inr"></i>{{number_format($item->price,2)}}</span><span
+                            class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span><span
                         class="product_amt_real"> <i
-                            class="mdi mdi-currency-inr"></i>{{number_format($item->special_price,2)}}</span>
+                            class="mdi mdi-currency-usd"></i>{{number_format($item->special_price,2)}}</span>
             </div>
         @else
             <span class="product_amt_real"><i
-                        class="mdi mdi-currency-inr"></i>{{number_format($item->price,2)}}</span>
+                        class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span>
         @endif
         <div class="product_img">
-            <?php $image = \App\ItemImages::where(['item_master_id' => $item->id])->first(); ?>
+            @php $image = \App\ItemImages::where(['item_master_id' => $item->id])->first(); @endphp
             @if(isset($image))
                 <img src="{{url('p_img').'/'.$item->id.'/'.$image->image}}">
             @else

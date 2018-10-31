@@ -193,14 +193,14 @@
                                 <div class="option_availability">
                                     <div class="option_txt">Price ({{$itemcount}} items)</div>
                                     <div class="product_right_txt">
-                                        <i class="mdi mdi-currency-inr"></i>{{number_format($total,2)}}
+                                        <i class="mdi mdi-currency-usd"></i>{{number_format($total,2)}}
                                     </div>
                                 </div>
                                 @php $delivery_charge = DB::selectOne("select delivery_charge from delivery_charges where amount>$total and is_active= '1'"); @endphp
                                 <div class="option_availability">
                                     <div class="option_txt">Delivery Charges</div>
                                     <div class="product_right_txt" id="delivery_charge">
-                                        <i class="mdi mdi-currency-inr"></i>@if($total>0 && isset($delivery_charge)){{($delivery_charge->delivery_charge > 0 )?number_format($delivery_charge->delivery_charge,2):'0.00'}}@else {{'0.00'}} @endif
+                                        <i class="mdi mdi-currency-usd"></i>@if($total>0 && isset($delivery_charge)){{($delivery_charge->delivery_charge > 0 )?number_format($delivery_charge->delivery_charge,2):'0.00'}}@else {{'0.00'}} @endif
                                         <input type="hidden" name="delivery_charge"
                                                value="@if($total>0 && isset($delivery_charge)){{($delivery_charge->delivery_charge > 0 )?number_format($delivery_charge->delivery_charge,2):'0.00'}}@else {{'0.00'}} @endif">
                                     </div>
@@ -218,14 +218,14 @@
                                                 {{--<input type="hidden" name="selected_point" id="selected_point"/>--}}
                                                 {{--<input type="hidden" name="selected_promo" id="selected_promo"/>--}}
                                             {{--</div>--}}
-                                            {{--<i class="mdi mdi-currency-inr" id="point">{{$user->gain_amount}}</i>--}}
+                                            {{--<i class="mdi mdi-currency-usd" id="point">{{$user->gain_amount}}</i>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
                                 {{--</div>--}}
                                 {{--<div class="option_availability" id="promo_code_box" style="display: none">--}}
                                     {{--<div class="option_txt">Promo Pay</div>--}}
                                     {{--<div class="product_right_txt">--}}
-                                        {{--<i class="mdi mdi-currency-inr" id="promo">0.0</i> <i--}}
+                                        {{--<i class="mdi mdi-currency-usd" id="promo">0.0</i> <i--}}
                                                 {{--onclick="remove_promo()" class="mdi mdi-delete" id="remove_promo"></i>--}}
                                     {{--</div>--}}
                                 {{--</div>--}}
@@ -233,7 +233,7 @@
                             <div class="option_availability">
                                 <div class="option_txt">Net Payable</div>
                                 <div class="order_amt">
-                                    <i class="mdi mdi-currency-inr" id="net_amount">
+                                    <i class="mdi mdi-currency-usd" id="net_amount">
                                         @if($total>0)
                                             @if(isset($delivery_charge))
                                                 {{$delivery_charge->delivery_charge + $total}}
@@ -264,17 +264,17 @@
                                             class="mdi mdi-basket basic_icon_margin"></i>Keep Shopping</a>
                                 <button onclick="confirm_order();" type="button"
                                         class="btn btn-success pull-right btn-sm show" id="button_confirm_cod"><i
-                                            class="mdi mdi-currency-inr basic_icon_margin"></i>Confirm Order
+                                            class="mdi mdi-currency-usd basic_icon_margin"></i>Confirm Order
                                 </button>
 
                                 <button onclick="proceed_to_pay();" type="button" id="button_confirm_pay"
                                         class="btn btn-success pull-right btn-sm hide"><i
-                                            class="mdi mdi-currency-inr basic_icon_margin"></i>Proceed To Pay
+                                            class="mdi mdi-currency-usd basic_icon_margin"></i>Proceed To Pay
                                 </button>
                             </div>
                             <!--<div class="product_btn_box">
                                 <div class="btn btn-success confirm_order_btn">
-                                    <i class="mdi mdi-currency-inr basic_icon_margin"></i>Proceed To Pay
+                                    <i class="mdi mdi-currency-usd basic_icon_margin"></i>Proceed To Pay
                                 </div>
                             </div>-->
                         </div>
@@ -630,7 +630,7 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="order_amt margin_top15"><i
-                                                            class="mdi mdi-currency-inr"></i> {{number_format($row->price*$row->qty,2)}}
+                                                            class="mdi mdi-currency-usd"></i> {{number_format($row->price*$row->qty,2)}}
                                                 </div>
                                             </div>
                                         </div>

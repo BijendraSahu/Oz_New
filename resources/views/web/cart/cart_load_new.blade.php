@@ -18,7 +18,7 @@
             {{$itemcount}} Item
         </div>
         <div class="total_item_amt pull-right">
-            <span class="basic_icon mdi mdi-currency-inr"></span>
+            <span class="basic_icon mdi mdi-currency-usd"></span>
             {{$total}}
         </div>
     </div>

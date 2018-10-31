@@ -13,9 +13,11 @@
             height: 500px;
             overflow: hidden;
         }
+
         .banner_slider .item img {
             height: 100%;
         }
+
         .banner_arrow {
             top: 50%;
             width: 45px;
@@ -30,16 +32,20 @@
             transition: .5s all;
             z-index: 10;
         }
+
         .banner_arrow:hover {
             background: rgba(45, 45, 45, 0.6);
             color: #ffffff;
         }
+
         .banner_left {
             left: 1%;
         }
+
         .banner_right {
             right: 1% !important;
         }
+
         .owl-carousel {
             width: 100%;
             -webkit-tap-highlight-color: transparent;
@@ -291,7 +297,8 @@
 @stop
 
 @section('content')
-    <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line " data-ride="carousel"
+    <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line "
+         data-ride="carousel"
          data-pause="hover" data-interval="3500">
         <div class="carousel-inner" role="listbox">
             <div class="item active">
@@ -319,7 +326,8 @@
                 <div class="bs-slider-overlay"></div>
                 <div class="main_banner_txt">
                     <div class="main_txt">Antiques <span style="color: #dca816;">Marketplace</span></div>
-                    <div class="subhead">Antique is one of the best marketplace that allows you to buy the items you love
+                    <div class="subhead">Antique is one of the best marketplace that allows you to buy the items you
+                        love
                         and discover new favorites.
                     </div>
                 </div>
@@ -402,7 +410,8 @@
                         <i class="about_icons mdi mdi-account-edit"></i>
                     </div>
                     <div class="about_heading">Wholesales Registration</div>
-                    <div class="about_basic_txt">The only e-commerce plugin you need for your wholesale requirements.</div>
+                    <div class="about_basic_txt">The only e-commerce plugin you need for your wholesale requirements.
+                    </div>
                 </div>
                 <div class="collection_about_brics">
                     <div class="icons_block">
@@ -433,1245 +442,209 @@
             <div class="product_carousal_allbox">
                 <div class="carousal_head">
                     <span class="filter_head_txt slider_headtxt">Our Products</span>
-                    <a href="allproduct.php"><span class="view_all_btn">All View</span></a>
+                    <a href="{{url('product_list')}}"><span class="view_all_btn">All View</span></a>
                 </div>
                 <div class="owl-carousel brics_5">
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
+                    @foreach ($items as $item)
+                        <div class="item">
+                            <div class="product_block">
 
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
+                                @if(isset($item->special_price))
+                                    <div class="save_amt">Save <i class="mdi mdi-currency-usd"></i> {{$item->price-$item->special_price}}</div>
+
+                                    <div class="product_amt"><span class="product_amt_less"><i
+                                                    class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span><span
+                                                class="product_amt_real"> <i
+                                                    class="mdi mdi-currency-usd"></i>{{number_format($item->special_price,2)}}</span>
+                                    </div>
+                                @else
+                                    <span class="product_amt_real"><i
+                                                class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span>
+                                @endif
+                                <div class="product_img">
+                                    <?php $image = \App\ItemImages::where(['item_master_id' => $item->id])->first(); ?>
+                                    @if(isset($image))
+                                        <img src="{{url('p_img').'/'.$item->id.'/'.$image->image}}">
+                                    @else
+                                        <img src="{{url('images/default.png')}}">
+                                    @endif
+                                    <div class="hover_center_block" data-toggle="modal"
+                                         data-target="#Modal_ViewProductDetails"
+                                         id="{{$item->id}}" onclick="getItemDetails(this)">
+                                        <div class="product_hover_block">
+                                            <div class="mdi mdi-magnify"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
+                                <div class="product_name"><a class="product_details_link"
+                                                             href="{{url('view_product').'/'.encrypt($item->id)}}">
+                                        {{$item->name}}</a></div>
+                                <div class="availability_product_container">
+
                                 </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
+                                <div class="spinner_withbtn">
+                                    <div class="input-group qty_box">
+                                        <span class="qty_txt">Qty</span>
+                                        <input type="number" class="form-control text-center qty_edittxt" min="1"
+                                               max="10"
+                                               value="1" id="qty_{{$item->id}}">
                                     </div>
+                                    <button class="spinner_addcardbtn btn-primary" type="button"
+                                            onclick="AddTOcart(this);">
+                                        <i class="mdi mdi-cart"></i> <span class="button-group_text">Add</span></button>
+                                    <button class="spinner_addcardbtn btn-primary" id="{{$item->id}}" type="button"
+                                            data-content="{{$item->id}}" {{--$price->id--}} onclick="AddTOcart(this);">
+                                        <i id="{{$item->id}}"
+                                           class="mdi mdi-basket"></i>
+                                        <span class="button-group_text">Add</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/3.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/4.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/5.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/7.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet (Scuba)</div>
-
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/8.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/9.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/11.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="product_carousal_allbox">
                 <div class="carousal_head">
                     <span class="filter_head_txt slider_headtxt">Special of the Month</span>
-                    <a href="allproduct.php"><span class="view_all_btn">All View</span></a>
+                    <a href="{{url('product_list')}}"><span class="view_all_btn">All View</span></a>
                 </div>
                 <div class="owl-carousel brics_5">
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
+                    @foreach ($items as $item)
+                        @if($item->is_special_month==1)
+                            <div class="item">
+                                <div class="product_block">
 
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
+                                    @if(isset($item->special_price))
+                                        <div class="save_amt">Save <i class="mdi mdi-currency-usd"></i> {{$item->price-$item->special_price}}</div>
+
+                                        <div class="product_amt"><span class="product_amt_less"><i
+                                                        class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span><span
+                                                    class="product_amt_real"> <i
+                                                        class="mdi mdi-currency-usd"></i>{{number_format($item->special_price,2)}}</span>
+                                        </div>
+                                    @else
+                                        <span class="product_amt_real"><i
+                                                    class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span>
+                                    @endif
+                                    <div class="product_img">
+                                        <?php $image = \App\ItemImages::where(['item_master_id' => $item->id])->first(); ?>
+                                        @if(isset($image))
+                                            <img src="{{url('p_img').'/'.$item->id.'/'.$image->image}}">
+                                        @else
+                                            <img src="{{url('images/default.png')}}">
+                                        @endif
+                                        <div class="hover_center_block" data-toggle="modal"
+                                             data-target="#Modal_ViewProductDetails"
+                                             id="{{$item->id}}" onclick="getItemDetails(this)">
+                                            <div class="product_hover_block">
+                                                <div class="mdi mdi-magnify"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product_name"><a class="product_details_link"
+                                                                 href="{{url('view_product').'/'.encrypt($item->id)}}">
+                                            {{$item->name}}</a></div>
+                                    <div class="availability_product_container">
+
+                                    </div>
+                                    <div class="spinner_withbtn">
+                                        <div class="input-group qty_box">
+                                            <span class="qty_txt">Qty</span>
+                                            <input type="number" class="form-control text-center qty_edittxt" min="1"
+                                                   max="10"
+                                                   value="1" id="qty_{{$item->id}}">
+                                        </div>
+                                        <button class="spinner_addcardbtn btn-primary" type="button"
+                                                onclick="AddTOcart(this);">
+                                            <i class="mdi mdi-cart"></i> <span class="button-group_text">Add</span>
+                                        </button>
+                                        <button class="spinner_addcardbtn btn-primary" id="{{$item->id}}" type="button"
+                                                data-content="{{$item->id}}"
+                                                {{--$price->id--}} onclick="AddTOcart(this);">
+                                            <i id="{{$item->id}}"
+                                               class="mdi mdi-basket"></i>
+                                            <span class="button-group_text">Add</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/3.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/4.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/5.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/6.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/7.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet (Scuba)</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/8.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/9.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/11.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="product_carousal_allbox">
                 <div class="carousal_head">
                     <span class="filter_head_txt slider_headtxt">Latest Product</span>
-                    <a href="allproduct.php"><span class="view_all_btn">All View</span></a>
+                    <a href="{{url('product_list')}}"><span class="view_all_btn">All View</span></a>
                 </div>
                 <div class="owl-carousel brics_5">
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
+                    @foreach ($items as $item)
+                        <div class="item">
+                            <div class="product_block">
 
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
+                                @if(isset($item->special_price))
+                                    <div class="save_amt">Save <i class="mdi mdi-currency-usd"></i> {{$item->price-$item->special_price}}</div>
+
+                                    <div class="product_amt"><span class="product_amt_less"><i
+                                                    class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span><span
+                                                class="product_amt_real"> <i
+                                                    class="mdi mdi-currency-usd"></i>{{number_format($item->special_price,2)}}</span>
+                                    </div>
+                                @else
+                                    <span class="product_amt_real"><i
+                                                class="mdi mdi-currency-usd"></i>{{number_format($item->price,2)}}</span>
+                                @endif
+                                <div class="product_img">
+                                    <?php $image = \App\ItemImages::where(['item_master_id' => $item->id])->first(); ?>
+                                    @if(isset($image))
+                                        <img src="{{url('p_img').'/'.$item->id.'/'.$image->image}}">
+                                    @else
+                                        <img src="{{url('images/default.png')}}">
+                                    @endif
+                                    <div class="hover_center_block" data-toggle="modal"
+                                         data-target="#Modal_ViewProductDetails"
+                                         id="{{$item->id}}" onclick="getItemDetails(this)">
+                                        <div class="product_hover_block">
+                                            <div class="mdi mdi-magnify"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
+                                <div class="product_name"><a class="product_details_link"
+                                                             href="{{url('view_product').'/'.encrypt($item->id)}}">
+                                        {{$item->name}}</a></div>
+                                <div class="availability_product_container">
 
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
                                 </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
+                                <div class="spinner_withbtn">
+                                    <div class="input-group qty_box">
+                                        <span class="qty_txt">Qty</span>
+                                        <input type="number" class="form-control text-center qty_edittxt" min="1"
+                                               max="10"
+                                               value="1" id="qty_{{$item->id}}">
                                     </div>
+                                    <button class="spinner_addcardbtn btn-primary" type="button"
+                                            onclick="AddTOcart(this);">
+                                        <i class="mdi mdi-cart"></i> <span class="button-group_text">Add</span>
+                                    </button>
+                                    <button class="spinner_addcardbtn btn-primary" id="{{$item->id}}" type="button"
+                                            data-content="{{$item->id}}"
+                                            {{--$price->id--}} onclick="AddTOcart(this);">
+                                        <i id="{{$item->id}}"
+                                           class="mdi mdi-basket"></i>
+                                        <span class="button-group_text">Add</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/3.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/4.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/5.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/7.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet (Scuba)</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/8.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/9.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/1.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/11.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_block">
-                            <div class="save_amt">Save Rs. 10</div>
-                            <div class="product_amt">
-                            <span class="product_amt_less">
-        <i class="mdi mdi-currency-inr"></i>40.00</span>
-                                <span class="product_amt_real">
-        <i class="mdi mdi-currency-inr"></i>50.00</span>
-                            </div>
-                            <div class="product_img">
-                                <img src="images/2.jpg">
-                                <div class="hover_center_block">
-                                    <div class="product_hover_block" onclick="Initialize_ProductDetails();"
-                                         data-toggle="modal"
-                                         data-target="#Modal_ViewProductDetails">
-                                        <div class="mdi mdi-magnify"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_name">Divers Helmet</div>
-                            <div class="product_qty">
-                                <select class="form-control product_drop">
-                                    <option value="5">1 kg - Rs.18.00</option>
-                                    <option value="6">500 gm - Rs.9.00</option>
-                                </select>
-                            </div>
-                            <div class="spinner_withbtn">
-                                <div class="input-group qty_box">
-                                    <span class="qty_txt">Qty</span>
-                                    <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
-                                           value="0">
-                                </div>
-                                <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
-                                    <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
         </div>
     </section>
-    <div id="Modal_ViewProductDetails" class="modal fade-scale" tabindex="-1" aria-labelledby="myModalLabel" role="dialog">
+    <div id="Modal_ViewProductDetails" class="modal fade-scale" tabindex="-1" aria-labelledby="myModalLabel"
+         role="dialog">
         <div class="modal-dialog product_details_model">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1716,13 +689,15 @@
                                 </div>
                                 <div class="option_availability">
                                     <button class="more_addToCart btn-primary" type="button">
-                                        <i class="mdi mdi-cart"></i> <span class="button-group__text">Add</span></button>
+                                        <i class="mdi mdi-cart"></i> <span class="button-group__text">Add</span>
+                                    </button>
                                 </div>
                                 <div class="more_product_head">
                                     Description :
                                 </div>
                                 <div class="more_product_details">
-                                    Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil
+                                    Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya
+                                    Oil
                                     Pouch 1 LTFortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil Pouch 1 LT
                                 </div>
 
