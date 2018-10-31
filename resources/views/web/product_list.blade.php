@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Buy Men Readymade latest collection Online : Taj Tailors')
+@section('title', 'OZ DOLLARS | Product List')
 
 @section('head')
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js" type="text/javascript"></script>
@@ -2421,17 +2421,17 @@
             });
         }
 
-        function checkOffset() {
-            if ($('#product_filter_container').offset().top + $('#product_filter_container').height()
-                >= $('#footer').offset().top - 30) {
-                $('#product_filter_container').addClass('filter_removefixed');
-            }
-            if ($(document).scrollTop() + window.innerHeight < $('#footer').offset().top) {
-                $('#product_filter_container').removeClass('filter_removefixed');
-            }
-        }
+//        function checkOffset() {
+//            if ($('#product_filter_container').offset().top + $('#product_filter_container').height()
+//                >= $('#footer').offset().top - 30) {
+//                $('#product_filter_container').addClass('filter_removefixed');
+//            }
+//            if ($(document).scrollTop() + window.innerHeight < $('#footer').offset().top) {
+//                $('#product_filter_container').removeClass('filter_removefixed');
+//            }
+//        }
         $(document).scroll(function () {
-            checkOffset();
+           // checkOffset();
         });
         $(document).ready(function () {
             $('#filter_data li').click(function () {
@@ -2450,62 +2450,39 @@
     </script>
 @stop
 @section('content')
-    <section class="product_section">
-        <div class="container-fluid">
-            <div class="product_all_container" id="product_all_container">
+    <section class="product_maincontainer">
+        <div class="product_section">
+            <div class="col-md-2 filter_right_fixed">
                 <div class="product_filter_container" id="product_filter_container">
                     <div class="product_filter_head">
-                        Search Filter
+                        Product Category
                     </div>
-                    <div class="filter_box_container style-scroll">
-                        <div class="filter_main_head">Product Category</div>
-                        <ul class="product_list_ul style-scroll" id="filter_data">
-                            <li onclick="get_items(0);" class="selected" id="0">All Products</li>
-                            @foreach($categories as $category)
-                                <li onclick="get_items('{{$category->id}}')"
-                                    id="{{$category->id}}">{{$category->name}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="filter_box_container style-scroll">
-                        <div class="filter_main_head">Price</div>
-                        <div class="wrapper">
-                            <div class="range-slider">
-                                <input type="text" name="" class="js-range-slider" value=""/>
-                            </div>
-                            <hr>
-                            <div class="extra-controls form-inline">
-                                <div class="form-group">
-                                    <input type="text" class="range_txt js-input-from form-control" id="min_price"
-                                           placeholder="Min"
-                                           style="margin-right:8%;"/>
-                                    <input type="text" class="range_txt js-input-to form-control" id="max_price"
-                                           placeholder="Max"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter_price_btnbox">
-                            <button class="btn btn-primary btn_filter" onclick="getMinMaxItems()">
-                                <i class="mdi mdi-filter"></i>Filter
-                            </button>
+                    <div class="search_filter">
+                        <input type="text" class="main_filter_search" placeholder="search"/>
+                        <div class="filter_search_icon">
+                            <i class="mdi mdi-magnify"></i>
                         </div>
                     </div>
-                    <div class="filter_box_container">
-                        <div class="filter_main_head">Fabric</div>
-                        <ul class="febric_filter_ul style-scroll">
-                            @foreach($fabrics as $fabric)
-                                <li>
-                                    <div class="checkbox"><label>
-                                            <input type="checkbox" onclick="get_fabric_product(this)"
-                                                   id="{{$fabric->id}}" name="fabrik_id"><span class="cr">
-                                        <i class="cr-icon mdi mdi-check"></i></span>
-                                        </label></div>{{$fabric->name}}
-                                </li>
-                            @endforeach
-                        </ul>
+                    <ul class="product_list_ul style-scroll" id="filter_data">
+                        <li onclick="get_items(0);" class="selected" id="0">All Products</li>
+                        @foreach($categories as $category)
+                            <li onclick="get_items('{{$category->id}}')"
+                                id="{{$category->id}}">{{$category->name}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="view_headbox">
+                    <div class="viewtype_txt">Product List</div>
+                    <div class="product_search_box">
+                        <input type="text" class="header_search" autocomplete="off" onautocomplete="false"
+                               placeholder="Search by product" onkeyup="HeaderSearchFilter(this);">
+                        <input type="hidden" name="search" id="search_user_id">
+                        <i class="product_search_icon mdi mdi-magnify"></i>
                     </div>
                 </div>
-                <div class="product_container" id="product_all">
+                <div class="owl-carousel brics_5 product_maincontainer" id="product_all">
 
                 </div>
             </div>
@@ -2577,7 +2554,6 @@
         var append_div = '<div class="product_block loading_block" id="load_item"><div class="single_line"><div class="load_waves"></div></div><div class="img_load"><div class="load_waves"></div></div><div class="single_line"><div class="load_waves"></div></div><div class="single_line"><div class="load_waves"></div></div><div class="single_line"><div class="load_waves"></div></div></div>';
 
         var no_record = '<div class="no_found_row">No more items available !</div>';
-
 
         function getItemid(dis) {
             $('#item_master_id').val(dis);

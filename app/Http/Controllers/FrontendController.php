@@ -248,7 +248,7 @@ class FrontendController extends Controller
 //        $s = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $items = DB::select($s);
         if ($numrows > 0) {
-            return view('web.product_load')->with(['items' => $items, 'items_count' => $numrows]);
+            return view('web.product_load_new')->with(['items' => $items, 'items_count' => $numrows]);
         } else {
             return response()->json(array('no_record' => 'no_record'));
         }
@@ -286,7 +286,7 @@ class FrontendController extends Controller
         $sql_all = request('fabric_id') == '' ? $all1 : $by_id1;
         $items = DB::select($sql_all);
         if ($numrows > 0) {
-            return view('web.product_load')->with(['items' => $items, 'items_count' => $numrows]);
+            return view('web.product_load_new')->with(['items' => $items, 'items_count' => $numrows]);
         } else {
             return response()->json(array('no_record' => 'no_record'));
         }
@@ -324,7 +324,7 @@ class FrontendController extends Controller
 //        $s = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $items = DB::select($s);
         if ($numrows > 0) {
-            return view('web.product_load')->with(['items' => $items, 'items_count' => $numrows]);
+            return view('web.product_load_new')->with(['items' => $items, 'items_count' => $numrows]);
         } else {
             return response()->json(array('no_record' => 'no_record'));
         }
@@ -486,7 +486,7 @@ class FrontendController extends Controller
             if (count($email) > 0) {
                 $mail = new \App\Mail();
                 $mail->to = implode(",", $email);
-                $mail->subject = 'Taj Tailors - Support Team';
+                $mail->subject = 'OZ DOLLARS - Support Team';
                 $siteurl = 'http://www.organicdolchi.com/';
                 $username = $address->name;
 //                $salutation = ($user->gender == 'male') ? 'Mr.' : 'Mrs.';

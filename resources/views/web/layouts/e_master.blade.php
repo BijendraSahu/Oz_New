@@ -11,9 +11,10 @@
     {{--type="text/css" media="all" data-viewport-units-buggyfill="ignore"/>--}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{---------------Notification---------------}}
-    <link rel="stylesheet" href="http://18.188.188.62/papersrc/assets/plugins/notifications/css/lobibox.min.css"/>
-    <script src="http://18.188.188.62/papersrc/assets/plugins/notifications/js/notifications.min.js"></script>
-    <script src="http://18.188.188.62/papersrc/assets/plugins/notifications/js/notification-custom-script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url('css/lobibox.min.css')}}">
+    <script src="{{url('js/notifications.min.js')}}"></script>
+    <script src="{{url('js/notification-custom-script.js')}}"></script>
     {{---------------Notification---------------}}
 
     <script type=text/javascript>

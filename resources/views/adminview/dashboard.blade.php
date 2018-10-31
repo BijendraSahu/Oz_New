@@ -271,21 +271,21 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="{{url('blog')}}">
-                            <?php $blogdata = \App\Blogmodel::count();?>
-                            <div class="col-sm-3">
-                                <div class="white_brics">
-                                    <div class="white_icon_withtxt">
-                                        <div class="white_icons_blk white_brics_clr2"><i
-                                                    class="mdi mdi-message-image"></i></div>
-                                        <div class="white_brics_txt">Blog</div>
-                                        <div class="white_brics_count">{{$blogdata}}</div>
-                                    </div>
-                                    <div class="brics_progress white_brics_border_clr2" style="
-"></div>
-                                </div>
-                            </div>
-                        </a>
+                        {{--<a href="{{url('blog')}}">--}}
+                            {{--@php $blogdata = \App\Blogmodel::count() @endphp--}}
+                            {{--<div class="col-sm-3">--}}
+                                {{--<div class="white_brics">--}}
+                                    {{--<div class="white_icon_withtxt">--}}
+                                        {{--<div class="white_icons_blk white_brics_clr2"><i--}}
+                                                    {{--class="mdi mdi-message-image"></i></div>--}}
+                                        {{--<div class="white_brics_txt">Blog</div>--}}
+                                        {{--<div class="white_brics_count">{{$blogdata}}</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="brics_progress white_brics_border_clr2" style="--}}
+{{--"></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</a>--}}
                         <a href="{{url('testimonials')}}">
                             <?php $testimonials = \App\Testimonials::count();?>
                             <div class="col-sm-3">

@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : About')
+@section('title', 'OZ DOLLARS : About')
 {{--<style>--}}
 {{--.main_div{--}}
 {{--margin-bottom: 170px;--}}

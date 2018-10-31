@@ -381,110 +381,6 @@
                                         </div>
 
 
-                                        <div class="form-group field_wrapper">
-                                            <label class="form-label">Enter Price Details<span
-                                                        style="color: red;">*</span></label>
-                                            <br>
-
-                                            <?php $counter = 1; ?>
-                                            @foreach($all_items_price as $priceobj)
-
-                                                <div class="col-sm-1 form-group">
-
-                                                    <input type="text" class="form-control" id="unitismine"
-                                                           name="unit[]"
-                                                           value="{{$priceobj->unit}}"
-                                                           placeholder="Unit" {{$counter == 1 ?'required':''}} />
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <select class="form-control" name="unit[]" id="weight">
-                                                        <option value="{{$priceobj->weight}}">{{$priceobj->weight}}</option>
-                                                        <option value="">select</option>
-                                                        <option value="Kg">Kg</option>
-                                                        <option value="Gms">Gms</option>
-                                                        <option value="Lt">Lt</option>
-                                                        <option value="ml">ml</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]"
-                                                           value="{{$priceobj->cost_price}}"
-                                                                   placeholder="Cost price" required/>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]"
-                                                           value="{{$priceobj->price}}"
-                                                           placeholder="Price" {{$counter == 1 ?'required':''}}/>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]"
-                                                           value="{{$priceobj->spl_price}}"
-                                                           placeholder="Special Price" {{$counter == 1 ?'required':''}}/>
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <input type="text" class="form-control" name="unit[]"
-                                                           value="{{$priceobj->qty}}"
-                                                           placeholder="Qty" {{$counter == 1 ?'required':''}}/>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]"
-                                                           value="{{$priceobj->product_id}}"
-                                                           placeholder="Product Id" {{$counter == 1 ?'required':''}}/>
-                                                </div>
-                                                <p class="clearfix"></p>
-                                                {{--<div class="col-sm-1 form-group">
-                                                    <a href="javascript:void(0);" class="addbtn add_button" name="price[]"
-                                                       title="Add field"><img src="{{url('assets/add-icon.png')}}"/></a>
-                                                </div>--}}
-                                                <?php $counter++; ?>
-                                            @endforeach
-                                            <?php $pc = count($all_items_price);
-                                            $empty_price = 4 - $pc;
-                                            ?>
-                                            @for($i=0; $i<$empty_price; $i++)
-                                                <div class="col-sm-1 form-group">
-
-                                                    <input type="text" class="form-control" id="unitismine"
-                                                           name="unit[]" value=""
-                                                           placeholder="Unit"/>
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <select class="form-control" name="unit[]" id="weight">
-                                                        <option value="">select</option>
-                                                        <option value="Kg">Kg</option>
-                                                        <option value="Gms">Gms</option>
-                                                        <option value="Lt">Lt</option>
-                                                        <option value="ml">ml</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]" value=""
-                                                           placeholder="Cost Price"/>
-                                                </div>
-
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]" value=""
-                                                           placeholder="Price"/>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]" value=""
-                                                           placeholder="Special Price"/>
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <input type="text" class="form-control" name="unit[]" value=""
-                                                           placeholder="Qty"/>
-                                                </div>
-                                                <div class="col-sm-2 form-group">
-                                                    <input type="text" class="form-control" name="unit[]" value=""
-                                                           placeholder="Product Id"/>
-                                                </div>
-                                                <p class="clearfix"></p>
-                                            @endfor
-
-
-                                        </div>
-
-
                                         <p class="clearfix"></p>
 
                                         <label>Upload Image</label> <input type="file" onchange="PreviewImage();"
@@ -530,11 +426,21 @@
                                         </div>
 
 
+                                        {{--<div class="col-sm-6 form-group">--}}
+
+                                            {{--<input type="text" value="{{$all_items->delivery}}" name="item_delivery"--}}
+                                                   {{--class="form-control"--}}
+                                                   {{--placeholder="Enter Delivery Information">--}}
+                                        {{--</div>--}}
+
                                         <div class="col-sm-6 form-group">
 
-                                            <input type="text" value="{{$all_items->delivery}}" name="item_delivery"
-                                                   class="form-control"
-                                                   placeholder="Enter Delivery Information">
+                                            <input type="text" name="price" value="{{$all_items->price}}" class="form-control"
+                                                   placeholder="Enter Price" required>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            <input type="text" value="{{$all_items->special_price}}" name="special_price" class="form-control"
+                                                   placeholder="Enter Special Price">
                                         </div>
                                         <div class="col-sm-6 form-group">
                                             <input type="text" value="{{$all_items->meta_tag}}" name="item_metatag"
@@ -551,8 +457,9 @@
                                                    name="item_metadescription" class="form-control"
                                                    placeholder="Enter Meta Description">
                                         </div>
+
                                         <div class="col-sm-6 form-group">
-                                            <input type="submit" value="Add"
+                                            <input type="submit" value="Update"
                                                    class="btn btn-success">
                                         </div>
 

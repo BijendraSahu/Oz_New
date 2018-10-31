@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : Order List')
+@section('title', 'OZ DOLLARS : Order List')
 
 @section('content')
     <section class="product_section">

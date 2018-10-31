@@ -136,37 +136,37 @@ class ItemmasterController extends Controller
             }
         }
 
-        $count = count(request('size')) / 2;
-        $item_unit = request('size');
-        $u = 0;
-        $k = 1;
-        /*$k = 1;
-        $cp = 2;
-        $p = 3;
-        $s = 4;
-        $q = 5;
-        $pr = 6;*/
-        for ($i = 0; $i < $count; $i++) {
-            $price = new ItemSize();
-            $price->item_master_id = $item->id;
-            $price->size = $item_unit[$u];
-            $price->qty = $item_unit[$k];
-           /* $price->weight = $item_unit[$k];
-            $price->cost_price = $item_unit[$cp];
-            $price->price = $item_unit[$p];
-            $price->spl_price = $item_unit[$s];
-            $price->qty = $item_unit[$q];
-            $price->product_id = $item_unit[$pr];*/
-            $price->save();
-            $u = $k + 1;
-            $k = $k + 2;
-//            $k = $pr + 2;
-//            $cp = $pr + 3;
-//            $p = $pr + 4;
-//            $s = $pr + 5;
-//            $q = $pr + 6;
-//            $pr = $pr + 7;
-        }
+//        $count = count(request('size')) / 2;
+//        $item_unit = request('size');
+//        $u = 0;
+//        $k = 1;
+//        /*$k = 1;
+//        $cp = 2;
+//        $p = 3;
+//        $s = 4;
+//        $q = 5;
+//        $pr = 6;*/
+//        for ($i = 0; $i < $count; $i++) {
+//            $price = new ItemSize();
+//            $price->item_master_id = $item->id;
+//            $price->size = $item_unit[$u];
+//            $price->qty = $item_unit[$k];
+//           /* $price->weight = $item_unit[$k];
+//            $price->cost_price = $item_unit[$cp];
+//            $price->price = $item_unit[$p];
+//            $price->spl_price = $item_unit[$s];
+//            $price->qty = $item_unit[$q];
+//            $price->product_id = $item_unit[$pr];*/
+//            $price->save();
+//            $u = $k + 1;
+//            $k = $k + 2;
+////            $k = $pr + 2;
+////            $cp = $pr + 3;
+////            $p = $pr + 4;
+////            $s = $pr + 5;
+////            $q = $pr + 6;
+////            $pr = $pr + 7;
+//        }
 
         return redirect('items')->with('message', 'Product has been added');
 
@@ -273,39 +273,39 @@ class ItemmasterController extends Controller
             }
         }
 
-        ItemPrice::where('item_master_id', $update_this)
-            ->delete();
-        $count = count(request('unit')) / 6;
-        $item_unit = request('unit');
-        $u = 0;
-        $k = 1;
-        $cp = 2;
-        $p = 3;
-        $s = 4;
-        $q = 5;
-        $pr = 6;
-        for ($i = 0; $i < $count; $i++) {
-            if ($item_unit[$u] != "")
-            {
-                $price = new ItemPrice();
-            $price->item_master_id = $update_this;
-            $price->unit = $item_unit[$u];
-            $price->weight = $item_unit[$k];
-            $price->cost_price = $item_unit[$cp];
-            $price->price = $item_unit[$p];
-            $price->spl_price = $item_unit[$s];
-            $price->qty = $item_unit[$q];
-            $price->product_id = $item_unit[$pr];
-            $price->save();
-                $u = $pr+ 1;
-                $k = $pr + 2;
-                $cp = $pr + 3;
-                $p = $pr + 4;
-                $s = $pr + 5;
-                $q = $pr + 6;
-                $pr = $pr + 7;
-        }
-        }
+//        ItemPrice::where('item_master_id', $update_this)
+//            ->delete();
+//        $count = count(request('unit')) / 6;
+//        $item_unit = request('unit');
+//        $u = 0;
+//        $k = 1;
+//        $cp = 2;
+//        $p = 3;
+//        $s = 4;
+//        $q = 5;
+//        $pr = 6;
+//        for ($i = 0; $i < $count; $i++) {
+//            if ($item_unit[$u] != "")
+//            {
+//                $price = new ItemPrice();
+//            $price->item_master_id = $update_this;
+//            $price->unit = $item_unit[$u];
+//            $price->weight = $item_unit[$k];
+//            $price->cost_price = $item_unit[$cp];
+//            $price->price = $item_unit[$p];
+//            $price->spl_price = $item_unit[$s];
+//            $price->qty = $item_unit[$q];
+//            $price->product_id = $item_unit[$pr];
+//            $price->save();
+//                $u = $pr+ 1;
+//                $k = $pr + 2;
+//                $cp = $pr + 3;
+//                $p = $pr + 4;
+//                $s = $pr + 5;
+//                $q = $pr + 6;
+//                $pr = $pr + 7;
+//        }
+//        }
 
         return redirect('items')->with('message', 'Product has been Updated');
 

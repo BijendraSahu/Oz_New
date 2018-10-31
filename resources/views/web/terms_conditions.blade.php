@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : Terms & Conditions')
+@section('title', 'OZ DOLLARS : Terms & Conditions')
 
 @section('head')
     <section class="feedback_block">

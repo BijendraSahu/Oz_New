@@ -433,33 +433,33 @@
                                         </div>
                                         <br>
 
-                                        <div>
-                                            <div class="form-group field_wrapper">
-                                                <label class="form-label">Enter Price Details<span
-                                                            style="color: red;">*</span></label>
-                                                <br>
-                                                <div class="col-sm-1 form-group">
-                                                    <select class="form-control" name="size[]" id="weight">
-                                                        <option value="30">30</option>
-                                                        <option value="32">32</option>
-                                                        <option value="34">34</option>
-                                                        <option value="36">36</option>
-                                                        <option value="38">38</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <input type="text" class="form-control" name="size[]" value=""
-                                                           placeholder="Qty" required/>
-                                                </div>
-                                                <div class="col-sm-1 form-group">
-                                                    <a href="javascript:void(0);" class="addbtn add_button"
-                                                       name="price[]"
-                                                       title="Add field"><img src="{{url('assets/add-icon.png')}}"/></a>
-                                                </div>
-                                                <p class="clearfix"></p>
+                                        {{--<div>--}}
+                                            {{--<div class="form-group field_wrapper">--}}
+                                                {{--<label class="form-label">Enter Price Details<span--}}
+                                                            {{--style="color: red;">*</span></label>--}}
+                                                {{--<br>--}}
+                                                {{--<div class="col-sm-1 form-group">--}}
+                                                    {{--<select class="form-control" name="size[]" id="weight">--}}
+                                                        {{--<option value="30">30</option>--}}
+                                                        {{--<option value="32">32</option>--}}
+                                                        {{--<option value="34">34</option>--}}
+                                                        {{--<option value="36">36</option>--}}
+                                                        {{--<option value="38">38</option>--}}
+                                                    {{--</select>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="col-sm-1 form-group">--}}
+                                                    {{--<input type="text" class="form-control" name="size[]" value=""--}}
+                                                           {{--placeholder="Qty" required/>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="col-sm-1 form-group">--}}
+                                                    {{--<a href="javascript:void(0);" class="addbtn add_button"--}}
+                                                       {{--name="price[]"--}}
+                                                       {{--title="Add field"><img src="{{url('assets/add-icon.png')}}"/></a>--}}
+                                                {{--</div>--}}
+                                                {{--<p class="clearfix"></p>--}}
 
-                                            </div>
-                                        </div>
+                                            {{--</div>--}}
+                                        {{--</div>--}}
 
 
                                         <p class="clearfix"></p>

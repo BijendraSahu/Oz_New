@@ -63,7 +63,7 @@
             <td colspan="4" style="text-align: center;">
                 <span onclick="abc();" class="center_headtxt backgroud_my">INVOICE</span>
                 <br>
-                <span class="center_headtxt"> Taj Tailors </span>
+                <span class="center_headtxt"> OZ DOLLARS </span>
                 <span class="small_head">TIN No. : 23729162058</span>
                 <span class="small_head">PH NO. : 0761-4048090, 0761-4045064</span>
                 <span class="small_head">GSTIN : 23AACCD5322K1ZX</span>

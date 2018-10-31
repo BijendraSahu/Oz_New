@@ -18,7 +18,8 @@ class CartController extends Controller
     public function cartload()
     {
         $cart = Cart::content();
-        return view('web.cart.cart_load')->with(['cart' => $cart]);
+//        return view('web.cart.cart_load')->with(['cart' => $cart]);
+        return view('web.cart.cart_load_new')->with(['cart' => $cart]);
     }
 
     public function addtocart()
@@ -46,7 +47,7 @@ class CartController extends Controller
             \Session::flash('success-msg', 'Cart Is Empty');
         }
         $cart_total = Cart::total();
-        return view('web.cart.cart_load')->with(['cart' => $cart]);
+        return view('web.cart.cart_load_new')->with(['cart' => $cart]);
     }
 
     public function cart_update($id)
@@ -70,7 +71,7 @@ class CartController extends Controller
         $rowId = request('cart_item_id');
         Cart::remove($rowId);
         $cart = Cart::content();
-        return view('web.cart.cart_load')->with(['cart' => $cart]);
+        return view('web.cart.cart_load_new')->with(['cart' => $cart]);
     }
 
 

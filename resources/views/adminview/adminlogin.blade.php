@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Taj Tailers | Login</title>
+    <title>OZ DOLLARS | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <link rel="shortcut icon" type="images/png" href="{{url('assets/images/dashbaord_fevicon.png')}}"/>
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.css')}}" />
@@ -20,6 +20,10 @@
         }
         .input-group-addon{
             background-color: #fff !important;
+        }
+        .login_bg{
+            background: url("{{url('images/oz-images/oz-banner5.jpg')}}");
+
         }
     </style>
     <script type="text/javascript">
@@ -148,9 +152,9 @@
 <body class="login_bg">
 <div class="container">
     <div class="row">
-        <div class="col-xs-4 col-md-offset-8 login_form" style="background: #00000047">
+        <div class="col-xs-4 col-md-offset-8 login_form" style="background: #ffffff">
             <div class="logo_images">
-                <img style="height: 80px;" src="{{url('assets/images/organic_logo.png')}}" />
+                <img style="height: 80px;" src="{{url('images/logo.png')}}" />
             </div>
             <h2 class="login-caption" style="color: #ffcfcf;"><span style="color: #ffcfcf;" class="first_letter">L</span>ogin</h2>
             <div align="center" id="errorsec"></div>
@@ -176,7 +180,7 @@
     </div>
 </div>
 <div></div>
-<div class="particules" id="particles-js"></div>
+{{--<div class="particules" id="particles-js"></div>--}}
 <script>
     document.onkeydown=function(){
         if(window.event.keyCode=='13'){

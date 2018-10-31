@@ -1,73 +1,108 @@
-<footer class="tailors_footer" id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-xs-12 col-lg-8">
-                <div class="footer-column">
-                    <h4 class="border_bottom">Taj Tailors</h4>
-                    <ul class="links">
-                        <li class="first"><a href="{{url('about')}}" title="About Us">
-                                <i class="mdi mdi-arrow-right-bold"></i>ABOUT US</a></li>
-                        <li><a title="HOW IT WORKS" onclick="How_slide();">
-                                <i class="mdi mdi-arrow-right-bold"></i>HOW IT WORKS</a></li>
-                        <li><a title="Get measured" onclick="Review_slide();">
-                                <i class="mdi mdi-arrow-right-bold"></i>Reviews<!--Get measured--></a>
-                        </li>
-                        <li><a title="Prices" onclick="Price_slide();">
-                                <i class="mdi mdi-arrow-right-bold"></i>Prices</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="border_bottom">Customer care</h4>
-                    <ul class="links">
-                        <li class="first"><a target="_blank" title="Return Policy" href="{{url('return_policy')}}">
-                                <i class="mdi mdi-arrow-right-bold"></i>Return policy</a></li>
-                        <li><a target="_blank" title="Terms" href="{{url('terms_conditions')}}">
-                                <i class="mdi mdi-arrow-right-bold"></i>Terms &amp; Conditions</a></li>
-                        <li><a target="_blank" title="Addresses" href="{{url('contact_us')}}">
-                                <i class="mdi mdi-arrow-right-bold"></i>Contact US</a></li>
-                        @if(isset($_SESSION['user_master']))
-                            <li><a target="_blank" title="Orders History" href="{{url('order_list')}}">
-                                    <i class="mdi mdi-arrow-right-bold"></i>Orders History</a></li>
-                        @endif
-
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="border_bottom">COMPANY DETAILS</h4>
-                    <address>
-                        <div><em class="mdi mdi-map-marker-radius"></em>
-                            <span>ABC Write Town, Jabalpur Madhya Pradesh </span>
+<footer id="footer">
+    <div class="footer-inner">
+        <div class="newsletter-row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col">
+                        <div class="payment-accept">
+                            <div><img src="images/payment-1.png" alt="payment1"> <img src="images/payment-2.png"
+                                                                                      alt="payment2"> <img
+                                        src="images/payment-3.png" alt="payment3"> <img src="images/payment-4.png"
+                                                                                        alt="payment4"></div>
                         </div>
-                        <div><em class="mdi mdi-phone-classic"></em><span> + 0800 567 345</span></div>
-                        <div style="
-    border: none;
-"><em class="mdi mdi-email-alert"></em><span>abc@example.com</span></div>
-                    </address>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col1">
+                        <form action="#" method="post" id="newsletter-validate-detail1">
+                            <div class="newsletter-wrap">
+                                <div class="sign_uptxt">Sign up for emails</div>
+                                <input type="text" name="email" id="newsletter1" title="Sign up for our newsletter"
+                                       class="news_letter_txt required-entry validate-email"
+                                       placeholder="Enter your email address">
+                                <button type="submit" title="Subscribe" class="button subscribe">
+                                    <span>Subscribe</span></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xs-12 col-lg-4">
-                <div class="co-info">
-                    <h4>JOIN OUR MAILING LIST</h4>
-                    <div class="newsletter-wrap">
-                        <input type="text" autocomplete="off" name="email" id="newsletter1"
-                               title="Sign up for our newsletter" class="news_letter_txt required-entry validate-email"
-                               placeholder="Enter your email address">
-                        <button type="button" onclick="getSubscribe()" title="Subscribe" class="button subscribe">
-                            <span>Subscribe</span></button>
-                    </div>
-
-                    <div class="payment_optionbox">
-                        <h4>100% SECURE PAYMENTS</h4>
-                        <div class="payment-accept">
-                            <div><img src="{{url('images/payment-1.png')}}" alt="payment1">
-                                <img src="{{url('images/payment-2.png')}}" alt="payment2"> <img
-                                        src="{{url('images/payment-3.png')}}" alt="payment3"> <img
-                                        src="{{url('images/payment-4.png')}}" alt="payment4"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12 col-lg-4">
+                    <div class="co-info">
+                        <div><a href="index.html"><img src="images/logo.png" alt="footer logo" class="logo-img"></a>
                         </div>
 
+                        <p class="footer_about_p">
+                            OZ DOLLARS Australia Pty Ltd, is one stop destination for those looking for variety of nautical and
+                            medieval armours in Australia.
+                        </p>
+                        <div class="social">
+                            <ul class="footer_link">
+                                <li class="fb"><a target="_blank" rel="nofollow" href="#" title="Facebook"><i
+                                                class="mdi mdi-facebook"></i></a></li>
+                                <li class="tw"><a target="_blank" rel="nofollow" href="#" title="Twitter"><i
+                                                class="mdi mdi-twitter"></i></a>
+                                </li>
+                                <li class="googleplus"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"> <i
+                                                class="mdi mdi-google"></i></a></li>
+
+
+                                <li class="linkedin"><a target="_blank" rel="nofollow" href="#" title="Linkedin"><i
+                                                class="mdi mdi-linkedin"></i></a></li>
+                                <li class="youtube"><a target="_blank" rel="nofollow" href="#" title="Youtube"><i
+                                                class="mdi mdi-play"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="col-sm-8 col-xs-12 col-lg-8">
+                    <div class="footer-column">
+                        <h4>Our Company</h4>
+                        <ul class="links">
+                            <li class="first"><a href="index.php">
+                                    <i class="mdi mdi-arrow-right-bold"></i>HOME</a></li>
+                            <li><a href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>ABOUT</a></li>
+                            <li><a href="terms.php">
+                                    <i class="mdi mdi-arrow-right-bold"></i>TERMS &amp; CONDITIONS</a></li>
+                            <li><a href="returns_policy.php">
+                                    <i class="mdi mdi-arrow-right-bold"></i>PRIVACY POLICY</a></li>
+                            <li><a href="contactus.php">
+                                    <i class="mdi mdi-arrow-right-bold"></i>CONTACT US</a></li>
+                            <li><a href="blog_list.php">
+                                    <i class="mdi mdi-arrow-right-bold"></i>BLOG</a></li>
 
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul class="links">
+                            <li class="first"><a title="MEDIEVAL WARRIOR" href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>MEDIEVAL WARRIOR</a></li>
+                            <li><a title="Gift &amp; Home Decor" href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>GIFT &amp; HOME DECOR</a></li>
+                            <li><a title="NAUTICAL" href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>NAUTICAL</a></li>
+                            <li><a title="SOFT TOYS" href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>SOFT TOYS</a></li>
 
+                            <li><a title="All Product" href="#">
+                                    <i class="mdi mdi-arrow-right-bold"></i>ALL PRODUCT</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact Us</h4>
+                        <address>
+                            <div>
+                                <em class="mdi mdi-map-marker-radius"></em> <span>15 Tarniet, Major way, Victoria 3029 , Melbourne Australia</span>
+                            </div>
+                            <div><em class="mdi mdi-phone-classic"></em><span> + 0800 567 345</span></div>
+                            <div><em class="mdi mdi-fax"></em><span>45784145</span></div>
+                            <div><em class="mdi mdi-email-alert"></em><span>abc@example.com</span></div>
+                        </address>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,50 +112,10 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 coppyright">
                     © 2018 All Rights Reserved. Powered by
-                    <a href="http://retinodes.com/" target="_blank"><img src="{{url('images/retinodes_logo.png')}}"
+                    <a href="http://retinodes.com/" target="_blank"><img src="images/retinodes_logo.png"
                                                                          class="logo_powered"></a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-<script type="text/javascript">
-    function Requiredtxt(me) {
-        var text = $.trim($(me).val());
-        if (text == '') {
-            $(me).addClass("errorClass");
-            return false;
-        } else {
-            $(me).removeClass("errorClass");
-            return true;
-        }
-    }
-    function getSubscribe() {
-        debugger;
-        var email = $('#newsletter1').val();
-        var result = true;
-        if (!Boolean(Requiredtxt("#newsletter1"))) {
-            result = false;
-        }
-        if (!result) {
-            return false;
-        } else {
-            $.ajax({
-                type: "get",
-                contentType: "application/json; charset=utf-8",
-                url: "{{ url('subscribe') }}",
-                data: {email: email},
-                success: function (data) {
-                    if (data == 'Success') {
-                        $('#newsletter1').val('');
-                        swal("Thank you", "We will get back to you soon", "success");
-                    }
-                },
-                error: function (xhr, status, error) {
-//                    $('#err1').html(xhr.responseText);
-                    swal("Server Issue", "Something went wrong", "info");
-                }
-            });
-        }
-    }
-</script>

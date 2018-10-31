@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : My Cart')
+@section('title', 'OZ DOLLARS : My Cart')
 
 @section('head')
 

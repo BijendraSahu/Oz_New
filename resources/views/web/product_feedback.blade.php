@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : Product List')
+@section('title', 'OZ DOLLARS : Product List')
 
 @section('head')
     <script type="text/javascript">

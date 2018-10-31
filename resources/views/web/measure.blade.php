@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Taj Tailors : Book Appointment')
+@section('title', 'OZ DOLLARS : Book Appointment')
 <style type="text/css">
     .masurment_section {
         display: inline-block;

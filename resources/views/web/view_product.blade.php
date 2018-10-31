@@ -51,22 +51,7 @@
                     <div class="save_amt">Save Rs. {{$item->price-$item->special_price}}</div>
                 </div>
             @endif
-            <div class="option_availability">
-                <div class="option_txt">Option Availability :</div>
-                <div class="availability_container">
-                    <?php $sizes = \App\ItemSize::where(['item_master_id' => $item->id])->get();
 
-                    $count = 1;
-                    ?>
-                    @if(count($sizes)>0)
-                        @foreach($sizes as $size)
-                            <div class="available_box {{$count == 1 ?'avail_selected':''}}"
-                                 onclick="Select_Availability(this);">{{$size->size}}</div>
-                            @php $count++ @endphp
-                        @endforeach
-                    @endif
-                </div>
-            </div>
             <div class="option_availability">
                 <div class="option_txt">Qty :</div>
                 <input type="number" min="1" max="10" id="qty_view_{{$item->id}}" class="form-control text-center"
@@ -74,7 +59,7 @@
             </div>
             <div class="option_availability">
                 <button class="more_addToCart btn-primary" type="button" id="{{$item->id}}"
-                        onclick="AddTOcartView(this)"><i class="mdi mdi-cart"></i> <span id="{{$item->id}}"
+                        onclick="AddTOcartView_detail(this)"><i class="mdi mdi-cart"></i> <span id="{{$item->id}}"
                                                                                          class="button-group__text">Add</span>
                 </button>
             </div>
@@ -89,19 +74,20 @@
     </div>
 </div>
 <script>
-    function AddTOcartView(dis) {
+    function AddTOcartView_detail(dis) {
+        debugger;
         var itemid = $(dis).attr('id');
-        var rateid = $('#price :selected').val();
         var qty = $('#qty_view_' + itemid).val();
-        var size = $(dis).parent().parent().find('.avail_selected').text();
+//        var size = $(dis).parent().parent().find('.avail_selected').text();
         var carturl = "{{url('addtocart')}}";
         $.ajax({
             type: "get",
             contentType: "application/json; charset=utf-8",
             url: carturl,
-            data: {itemid: itemid, rateid: rateid, quantity: qty, size: size},
+            data: {itemid: itemid, quantity: qty},
             success: function (data) {
-                swal("Success", "Item has been added to cart", "success");
+//                swal("Success", "Item has been added to cart", "success");
+                success_noti("Item has been added to cart");
                 $("#cartload").html(data);
             },
             error: function (xhr, status, error) {
@@ -109,4 +95,28 @@
             }
         });
     }
+    {{--function AddTOcart(dis) {--}}
+        {{--var cart = $('#baskit_block');--}}
+        {{--var imgtodrag = $(dis).parent().parent().find("img").eq(0);--}}
+        {{--var itemid = $(dis).attr('id');--}}
+        {{--var rateid = $(dis).attr('data-content');--}}
+        {{--var qty = $('#qty_' + itemid).val();--}}
+        {{--var size = $(dis).parent().parent().find('.avail_selected').text();--}}
+        {{--var carturl = "{{url('addtocart')}}";--}}
+        {{--$.ajax({--}}
+            {{--type: "get",--}}
+            {{--contentType: "application/json; charset=utf-8",--}}
+            {{--url: carturl,--}}
+            {{--data: {itemid: itemid, rateid: rateid, quantity: qty, size: size},--}}
+            {{--success: function (data) {--}}
+                {{--$("#cartload").html(data);--}}
+{{--//                    ShowSuccessPopupMsg('Product has been added to cart');--}}
+            {{--},--}}
+            {{--error: function (xhr, status, error) {--}}
+                {{--$("#cartload").html(xhr.responseText);--}}
+{{--//                    alert('Technical Error Occured!');--}}
+            {{--}--}}
+        {{--});--}}
+
+    {{--}--}}
 </script>

@@ -1,6 +1,6 @@
 @extends('adminlayout.adminmaster')
 
-@section('title','Taj Tailors | OrderList')
+@section('title','OZ DOLLARS | OrderList')
 
 @section('content')
 
