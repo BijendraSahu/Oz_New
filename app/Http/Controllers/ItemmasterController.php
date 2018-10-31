@@ -235,6 +235,8 @@ class ItemmasterController extends Controller
             'name' => request('item_name'),
             'description' => request('temp'),
             'usage' => request('item_usage'),
+            'price' => request('price'),
+            'special_price' => request('special_price'),
             'specifcation' => request('item_specification'),
             'ingredients' => request('item_ingredients'),
             'nutrients' => request('item_nutrients'),

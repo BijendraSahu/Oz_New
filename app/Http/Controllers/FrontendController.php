@@ -41,7 +41,7 @@ class FrontendController extends Controller
 
     public function user_home()
     {
-        $by_id = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id ORDER BY i.id DESC LIMIT 20";
+        $by_id = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 ORDER BY i.id DESC LIMIT 20";
         $items = DB::select($by_id);
         if (isset($_SESSION['user_master'])) {
             if (!is_null($_SESSION['user_master'])) {
@@ -228,8 +228,8 @@ class FrontendController extends Controller
         $category_id = request('category_id');
         $qry = '';
 
-        $all = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id";
-        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id";
+        $all = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1";
+        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and ic.category_id = $category_id";
         $a = ($category_id == 0) ? $all : $by_id;
         $products_c = DB::select($a);
         $numrows = count($products_c);
@@ -247,10 +247,10 @@ class FrontendController extends Controller
         }
 
         $offset = ($currentpage - 1) * $rowsperpage;
-        $all = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
-        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+        $all = "SELECT DISTINCT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $s = ($category_id == 0) ? $all : $by_id;
-//        $s = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+//        $s = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $items = DB::select($s);
         if ($numrows > 0) {
             return view('web.product_load_new')->with(['items' => $items, 'items_count' => $numrows]);
@@ -265,8 +265,8 @@ class FrontendController extends Controller
 //        echo json_encode(request('fabric_id'));
         $fabric_id = request('fabric_id') != '' ? join(', ', request('fabric_id')) : '';
 
-        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id";
-        $by_id = "SELECT i.* FROM item_master i, item_fabric ifb where ifb.item_master_id = i.id and ifb.fabric_id in ($fabric_id)";
+        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1";
+        $by_id = "SELECT i.* FROM item_master i, item_fabric ifb where ifb.item_master_id = i.id and i.is_active = 1 and ifb.fabric_id in ($fabric_id)";
         $sql = request('fabric_id') == '' ? $all : $by_id;
         $products_c = DB::select($sql);
         $numrows = count($products_c);
@@ -284,8 +284,8 @@ class FrontendController extends Controller
         }
 
         $offset = ($currentpage - 1) * $rowsperpage;
-        $all1 = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id LIMIT $offset,$rowsperpage";
-        $by_id1 = "SELECT i.* FROM item_master i, item_fabric ifb where ifb.item_master_id = i.id and ifb.fabric_id in ($fabric_id) ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+        $all1 = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 LIMIT $offset,$rowsperpage";
+        $by_id1 = "SELECT i.* FROM item_master i, item_fabric ifb where ifb.item_master_id = i.id and i.is_active = 1 and ifb.fabric_id in ($fabric_id) ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
 
 
         $sql_all = request('fabric_id') == '' ? $all1 : $by_id1;
@@ -304,8 +304,8 @@ class FrontendController extends Controller
         $category_id = request('category_id');
         $qry = '';
 
-        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and price >= $min_price and price <=$max_price";
-        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id and price >= $min_price and price <=$max_price";
+        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and price >= $min_price and price <=$max_price";
+        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and ic.category_id = $category_id and price >= $min_price and price <=$max_price";
         $a = ($category_id == 0) ? $all : $by_id;
         $products_c = DB::select($a);
         $numrows = count($products_c);
@@ -323,8 +323,8 @@ class FrontendController extends Controller
         }
 
         $offset = ($currentpage - 1) * $rowsperpage;
-        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and price >= $min_price and price <=$max_price ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
-        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id and price >= $min_price and price <=$max_price ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+        $all = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and price >= $min_price and price <=$max_price ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
+        $by_id = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and i.is_active = 1 and ic.category_id = $category_id and price >= $min_price and price <=$max_price ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $s = ($category_id == 0) ? $all : $by_id;
 //        $s = "SELECT i.* FROM item_master i, item_category ic where ic.item_master_id = i.id and ic.category_id = $category_id ORDER BY i.id DESC LIMIT $offset,$rowsperpage";
         $items = DB::select($s);
