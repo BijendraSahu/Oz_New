@@ -1,6 +1,6 @@
 @extends('web.layouts.e_master')
 
-@section('title', 'Organic Food : Product Details')
+@section('title', 'Oz Dollars : Product Details')
 
 @section('head')
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
@@ -63,29 +63,28 @@
                 }
             });
         }
-        var fixed_leftposition;
-        function checkOffFixed() {
-            if ($('#product_details_containner').offset().top + $('#product_details_containner').height()
-                >= $('#footer').offset().top - 30) {
-                $('#product_details_containner').removeClass('position_fixed_removed');
-                $('#product_details_containner').css('left', 0);
-            }
-            if ($(document).scrollTop() + window.innerHeight < $('#footer').offset().top) {
-                $('#product_details_containner').addClass('position_fixed_removed');
-                $('#product_details_containner').css('left', fixed_leftposition);
-            }
-        }
-        $(document).ready(function () {
-            Initialize_ProductDetails();
-            fixed_leftposition = $('#product_details_containner').offset().left;
-            if ($(document).scrollTop() < 100) {
-                $('#product_details_containner').css('left', fixed_leftposition);
-                $('#product_details_containner').addClass('position_fixed_removed');
-            }
-        });
-        $(document).scroll(function () {
-            checkOffFixed();
-        });
+//        function checkOffFixed() {
+//            if ($('#product_details_containner').offset().top + $('#product_details_containner').height()
+//                >= $('#footer').offset().top - 30) {
+//                $('#product_details_containner').removeClass('position_fixed_removed');
+//                $('#product_details_containner').css('left', 0);
+//            }
+//            if ($(document).scrollTop() + window.innerHeight < $('#footer').offset().top) {
+//                $('#product_details_containner').addClass('position_fixed_removed');
+//                $('#product_details_containner').css('left', fixed_leftposition);
+//            }
+//        }
+//        $(document).ready(function () {
+//            Initialize_ProductDetails();
+//            fixed_leftposition = $('#product_details_containner').offset().left;
+//            if ($(document).scrollTop() < 100) {
+//                $('#product_details_containner').css('left', fixed_leftposition);
+//                $('#product_details_containner').addClass('position_fixed_removed');
+//            }
+//        });
+//        $(document).scroll(function () {
+//            checkOffFixed();
+//        });
         function Rating_slide() {
             var rating_position = $('#rating_product_row').offset().top;
             $('html, body').animate({scrollTop: rating_position - 95}, 1000);
@@ -98,10 +97,10 @@
 @stop
 @section('content')
     <section class="product_viewblock">
-        <div class="container">
+        <div class="container-fluid res_pad0">
             <div class="all_data_view">
-                <div class="col-sm-12">
-                    <div class="product_details_containner">
+                <div class="row">
+                    <div class="col-sm-5 filter_right_fixed">
                         <div class="product_magnifyimages_box" id="product_details_containner">
                             <div class="magnify">
                                 <div class="large" id="view_large_bg"></div>
@@ -133,40 +132,30 @@
                                 {{--<img class="product_brics_images" src="images/onion.jpg" onclick="appendimages(this);">--}}
                             </div>
                             <div class="availability_boxes">
-                                <?php
-                                $sizes = DB::select("select * from item_size where item_master_id = $item->id and qty > 0"); //\App\ItemSize::where(['item_master_id' => $item->id])->get();
-                                $count = 1;
-                                ?>
-                                <div class="offer_available">
-                                    <div class="option_availability">
-                                        <div class="option_txt">Option Availability :</div>
-                                        <div class="availability_container">
-                                            @if(count($sizes)>0)
-                                                @foreach($sizes as $size)
-                                                    <div id="{{$item->id}}"
-                                                         class="available_box {{$count == 1 ?'avail_selected':''}}"
-                                                         onclick="Select_Availability(this);">{{$size->size}}</div>
-                                                    @php $count++ @endphp
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
+                                <div class="more_details_txtrow">
+                                    <div class="option_txt">Price :</div>
+                                    <div class="order_amt"><i class="mdi mdi-currency-usd"></i>{{$item->price}}</div>
                                 </div>
-                                <div class="option_availability">
-                                    <div class="option_txt">Quantity :</div>
-                                    <input type="number" id="qty_{{$item->id}}" min="1" max="10" class="form-control text-center" value="1" />
+                                <div class="more_details_txtrow">
+                                    <div class="option_txt">Qty :</div>
+                                    <input type="number" min="1" max="10" class="form-control text-center more_details_qty"
+                                           value="1"/>
                                 </div>
 
                                 <div class="product_btn_box">
                                     <div class="btn btn-warning product_add_tocard" id="{{$item->id}}"
-                                         onclick="AddTOcart(this);" style="margin-right: 4%;">
+                                          onclick="AddTOcart(this);"
+                                         style="margin-right: 4%;">
                                         <i class="mdi mdi-basket"></i>Add To card
                                     </div>
-                                    <a href="{{url('checkout')}}" class="btn btn-success product_add_tocard"><i
+                                    <a href="{{url('checkout')}}" id="{{$item->id}}"
+                                       onclick="AddTOcart(this);" class="btn btn-success product_add_tocard"><i
                                                 class="mdi mdi-cart"></i>Buy Now</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-7">
                         <div class="more_productother_details">
                             <div class="more_product_head">
                                 {{$item->name}}
@@ -207,10 +196,61 @@
                                     0 Reviews
                                 </div>
                             </div>
+                            {{-- <div class="product_row" style="display: none">
+                                 <div class="real_amt">
+                                     <i class="mdi mdi-currency-inr"></i>
+                                     150.00
+                                 </div>
+                                 <div class="less_amt">
+                                     <i class="mdi mdi-currency-inr"></i>
+                                     180.00
+                                 </div>
+                             </div>--}}
+                            {{--<div class="more_product_head product_mainhead">Delivery</div>--}}
 
+                            {{--<div class="option_availability">--}}
+                            {{--<div class="option_txt">Delivery</div>--}}
+                            {{--<div class="product_right_txt">--}}
+                            {{--Usually delivered in 1-2 days.--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_head product_mainhead">--}}
+                                {{--Specifications :--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_details">--}}
+                                {{--{!! isset($item->specifcation)?$item->specifcation:'-'!!}--}}
+                            {{--</div>--}}
+                            {{-- <div class="option_availability">
+                                 <div class="option_txt">Product Type</div>
+                                 <div class="product_right_txt">
+                                     Whole Grains
+                                 </div>
+                             </div>--}}
+
+                            {{--<div class="more_product_head product_mainhead">--}}
+                                {{--Ingredients :--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_details">--}}
+                                {{--{!! isset($item->ingredients)?$item->ingredients:'-'!!}--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_head product_mainhead">--}}
+                                {{--Available Nutrients :--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_details">--}}
+                                {{--{!! isset($item->nutrients)?$item->nutrients:'-'!!}--}}
+                            {{--</div>--}}
                             <div class="more_product_head product_mainhead">
                                 Description :
                             </div>
+                            <div class="more_product_details">
+                                {!! isset($item->description)?$item->description:'-'!!}
+                            </div>
+                            {{--<div class="more_product_head product_mainhead">--}}
+                                {{--Usage :--}}
+                            {{--</div>--}}
+                            {{--<div class="more_product_details">--}}
+                                {{--{!! isset($item->usage)?$item->usage:'-'!!}--}}
+                            {{--</div>--}}
 
                             <div class="more_product_head product_mainhead" id="rating_product_row">
                                 Ratings :
@@ -448,6 +488,261 @@
             </div>
         </div>
     </section>
+    <section class="similer-product">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="view_similiour_headbox">
+                    <div class="viewtype_txt">Similar Products</div>
+                    <a href="{{url('product_list')}}" class="btn keep-shoping pull-right"><i
+                                class="mdi mdi-briefcase-check basic_icon_margin"></i>View All</a>
+                </div>
+                <div class="more_productother_details">
+                    <div class="product_block">
+                        <div class="save_amt">Save Rs. 10</div>
+
+                        <div class="product_amt">
+                            <span class="product_amt_less">
+        <i class="mdi mdi-currency-inr"></i>40.00</span>
+                            <span class="product_amt_real">
+        <i class="mdi mdi-currency-inr"></i>50.00</span>
+                        </div>
+                        <div class="product_img">
+                            <img src="{{url('images/teddy-3.png')}}">
+                            <div class="hover_center_block">
+                                <div class="product_hover_block" onclick="Initialize_ProductDetails();"
+                                     data-toggle="modal"
+                                     data-target="#Modal_ViewProductDetails">
+                                    <div class="mdi mdi-magnify"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_name">Teddy Bear</div>
+                        <div class="product_qty">
+                            <select class="form-control product_drop">
+                                <option value="5">$ 50</option>
+                                <option value="6">Qtv 2 - $ 90</option>
+                            </select>
+                        </div>
+
+                        <div class="spinner_withbtn">
+                            <div class="input-group qty_box">
+                                <span class="qty_txt">Qty</span>
+                                <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
+                                       value="0">
+                            </div>
+                            <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
+                                <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
+                        </div>
+                    </div>
+                    <div class="product_block">
+                        <div class="save_amt">Save Rs. 10</div>
+                        <div class="product_amt">
+                            <span class="product_amt_less">
+        <i class="mdi mdi-currency-inr"></i>40.00</span>
+                            <span class="product_amt_real">
+        <i class="mdi mdi-currency-inr"></i>50.00</span>
+                        </div>
+                        <div class="product_img">
+                            <img src="{{url('images/teddy-1.png')}}">
+                            <div class="hover_center_block">
+                                <div class="product_hover_block" onclick="Initialize_ProductDetails();"
+                                     data-toggle="modal"
+                                     data-target="#Modal_ViewProductDetails">
+                                    <div class="mdi mdi-magnify"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_name">Teddy Bear</div>
+                        <div class="product_qty">
+                            <select class="form-control product_drop">
+                                <option value="5">$ 50</option>
+                                <option value="6">Qtv 2 - $ 90</option>
+                            </select>
+                        </div>
+                        <div class="spinner_withbtn">
+                            <div class="input-group qty_box">
+                                <span class="qty_txt">Qty</span>
+                                <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
+                                       value="0">
+                            </div>
+                            <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
+                                <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
+                        </div>
+                    </div>
+                    <div class="product_block">
+                        <div class="save_amt">Save Rs. 10</div>
+
+                        <div class="product_amt">
+                            <span class="product_amt_less">
+        <i class="mdi mdi-currency-inr"></i>40.00</span>
+                            <span class="product_amt_real">
+        <i class="mdi mdi-currency-inr"></i>50.00</span>
+                        </div>
+                        <div class="product_img">
+                            <img src="{{url('images/teddy-4.png')}}">
+                            <div class="hover_center_block">
+                                <div class="product_hover_block" onclick="Initialize_ProductDetails();"
+                                     data-toggle="modal"
+                                     data-target="#Modal_ViewProductDetails">
+                                    <div class="mdi mdi-magnify"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_name">Teddy Bear</div>
+                        <div class="product_qty">
+                            <select class="form-control product_drop">
+                                <option value="5">$ 50</option>
+                                <option value="6">Qtv 2 - $ 90</option>
+                            </select>
+                        </div>
+
+                        <div class="spinner_withbtn">
+                            <div class="input-group qty_box">
+                                <span class="qty_txt">Qty</span>
+                                <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
+                                       value="0">
+                            </div>
+                            <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
+                                <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
+                        </div>
+                    </div>
+                    <div class="product_block">
+                        <div class="save_amt">Save Rs. 10</div>
+
+                        <div class="product_amt">
+                            <span class="product_amt_less">
+        <i class="mdi mdi-currency-inr"></i>40.00</span>
+                            <span class="product_amt_real">
+        <i class="mdi mdi-currency-inr"></i>50.00</span>
+                        </div>
+                        <div class="product_img">
+                            <img src="{{url('images/teddy-4.png')}}">
+                            <div class="hover_center_block">
+                                <div class="product_hover_block" onclick="Initialize_ProductDetails();"
+                                     data-toggle="modal"
+                                     data-target="#Modal_ViewProductDetails">
+                                    <div class="mdi mdi-magnify"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_name">Teddy Bear</div>
+                        <div class="product_qty">
+                            <select class="form-control product_drop">
+                                <option value="5">$ 50</option>
+                                <option value="6">Qtv 2 - $ 90</option>
+                            </select>
+                        </div>
+
+                        <div class="spinner_withbtn">
+                            <div class="input-group qty_box">
+                                <span class="qty_txt">Qty</span>
+                                <input type="number" class="form-control text-center qty_edittxt" min="0" max="10"
+                                       value="0">
+                            </div>
+                            <button class="spinner_addcardbtn btn-primary" type="button" onclick="AddTOcart(this);">
+                                <i class="mdi mdi-basket"></i> <span class="button-group_text">Add</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="Modal_ViewProductDetails" class="modal fade-scale" tabindex="-1" aria-labelledby="myModalLabel" role="dialog">
+        <div class="modal-dialog product_details_model">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Divers Helmet</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all_data_view">
+                        <div class="col-sm-6">
+                            <div class="magnifyimages_box">
+                                <div class="magnify">
+                                    <div class="large" id="view_large_bg"></div>
+                                    <img class="small" id="view_images" src="images/1.jpg"/>
+                                </div>
+                                <div class="images_thumbbox">
+                                    <img class="brics_images" src="images/1.jpg" onclick="appendimages(this);"/>
+                                    <img class="brics_images" src="images/2.jpg" onclick="appendimages(this);"/>
+                                    <img class="brics_images" src="images/3.jpg" onclick="appendimages(this);"/>
+                                    <img class="brics_images" src="images/4.jpg" onclick="appendimages(this);"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="more_other_details">
+                                <div class="more_product_head">
+                                    Divers Helmet
+                                </div>
+                                <div class="more_details_txtrow">
+                                    <div class="option_txt">Price :</div>
+                                    <div class="order_amt"><i class="mdi mdi-currency-usd"></i>300.00</div>
+                                </div>
+                                <div class="more_details_txtrow">
+                                    <div class="option_txt">Qty :</div>
+                                    <input type="number" min="1" max="10" class="form-control text-center more_details_qty"
+                                           value="1"/>
+                                </div>
+                                <div class="more_details_txtrow">
+                                    <div class="product_viewmore_btn_box">
+                                        <div class="btn btn-warning btn-sm">
+                                            <i class="mdi mdi-basket-unfill basic_icon_margin"></i>Add To card
+                                        </div>
+                                        <a href="checkout.php" class="btn keep-shoping btn-sm pull-right"><i
+                                                    class="mdi mdi-cart basic_icon_margin"></i>Buy Now</a>
+                                    </div>
+                                </div>
+                                <div class="more_product_head">
+                                    Description :
+                                </div>
+                                <div class="more_product_details">
+                                    Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil
+                                    Pouch 1 LTFortune Plus Soya Oil Pouch 1 LT Fortune Plus Soya Oil Pouch 1 LT
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Modal_NotifyMe" class="modal fade-scale" tabindex="-1" aria-labelledby="myModalLabel" role="dialog">
+        <div class="modal-dialog notifyme_model">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Notify Me for Product</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all_data_view">
+                        <div class="model_row">
+                            <input type="text" class="form-control" placeholder="Email Id"/>
+                        </div>
+                        <div class="model_row">
+                            <input type="text" class="form-control" placeholder="Mobile No."/>
+                        </div>
+                        <div class="model_row">
+                            <input type="text" class="form-control" placeholder="city"/>
+                        </div>
+                        <div class="model_row">
+                            <textarea class="form-control glo_txtarea" placeholder="Massage for product"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function AddTOcart(dis) {
             var itemid = $(dis).attr('id');

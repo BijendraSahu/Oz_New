@@ -5,9 +5,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col">
                         <div class="payment-accept">
-                            <div><img src="images/payment-1.png" alt="payment1"> <img src="images/payment-2.png"
+                            <div><img src="{{url('images/payment-1.png')}}" alt="payment1"> <img src="{{url('images/payment-2.png')}}"
                                                                                       alt="payment2"> <img
-                                        src="images/payment-3.png" alt="payment3"> <img src="images/payment-4.png"
+                                        src="{{url('images/payment-3.png')}}" alt="payment3"> <img src="{{url('images/payment-4.png')}}"
                                                                                         alt="payment4"></div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-4 col-xs-12 col-lg-4">
                     <div class="co-info">
-                        <div><a href="index.html"><img src="images/logo.png" alt="footer logo" class="logo-img"></a>
+                        <div><a href="{{url('/')}}"><img src="{{url('images/logo.png')}}" alt="footer logo" class="logo-img"></a>
                         </div>
 
                         <p class="footer_about_p">
@@ -60,17 +60,17 @@
                     <div class="footer-column">
                         <h4>Our Company</h4>
                         <ul class="links">
-                            <li class="first"><a href="index.php">
+                            <li class="first"><a href="{{url('/')}}">
                                     <i class="mdi mdi-arrow-right-bold"></i>HOME</a></li>
                             <li><a href="#">
                                     <i class="mdi mdi-arrow-right-bold"></i>ABOUT</a></li>
-                            <li><a href="terms.php">
+                            <li><a href="{{url('#')}}">
                                     <i class="mdi mdi-arrow-right-bold"></i>TERMS &amp; CONDITIONS</a></li>
-                            <li><a href="returns_policy.php">
+                            <li><a href="{{url('#')}}">
                                     <i class="mdi mdi-arrow-right-bold"></i>PRIVACY POLICY</a></li>
-                            <li><a href="contactus.php">
+                            <li><a href="{{url('#')}}">
                                     <i class="mdi mdi-arrow-right-bold"></i>CONTACT US</a></li>
-                            <li><a href="blog_list.php">
+                            <li><a href="{{url('#')}}">
                                     <i class="mdi mdi-arrow-right-bold"></i>BLOG</a></li>
 
                         </ul>
@@ -112,7 +112,7 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 coppyright">
                     © 2018 All Rights Reserved. Powered by
-                    <a href="http://retinodes.com/" target="_blank"><img src="images/retinodes_logo.png"
+                    <a href="http://retinodes.com/" target="_blank"><img src="{{url('images/retinodes_logo.png')}}"
                                                                          class="logo_powered"></a>
                 </div>
             </div>
